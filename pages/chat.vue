@@ -1,7 +1,9 @@
 <template>
-  <h1>
-    CHAT {{ user.name }}
-  </h1>
+  <div>
+    <ul>
+      <li v-for="m in messages">{{ m.text }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -15,7 +17,7 @@
         title: `Комната ${this.user.room}`
       }
     },
-    computed: mapState(['user'])
+    computed: mapState(['user', 'messages'])
   }
 </script>
 
