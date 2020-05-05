@@ -87,8 +87,17 @@
             name: this.name,
             room: this.room
           }
-          this.setUser(user);
-          this.$router.push('/chat')
+
+          this.$socket.emit('userJoined', user, data => {
+            if (typeof data === 'string') {
+              console.error(data)
+            } else {
+
+              user.id = data.userId;
+              this.setUser(user);
+              this.$router.push('/chat');
+            }
+          })
         }
       },
     },

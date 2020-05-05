@@ -10,6 +10,9 @@ export const mutations = {
   clearUser(state) {
     state.user = {}
     state.messages = []
+  },
+  SOCKET_newMessage(state, message) {
+    state.messages.push(message)
   }
 }
 
