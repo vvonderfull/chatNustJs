@@ -6,7 +6,7 @@
         :key="index"
         :name="m.name"
         :text="m.text"
-        owner
+        :owner="m.id === user.id"
       />
     </div>
     <div class="chat-form">
