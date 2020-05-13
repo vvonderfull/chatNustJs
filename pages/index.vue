@@ -8,7 +8,24 @@
       xs12
       sm8
     >
-      <v-card min-width="500" min-height="320" style="background-color: rgba(0,0,0,0.3)">
+      <v-card min-width="500" min-height="320" style="background-color: rgba(0,0,0,0.3); margin-top: 50px">
+
+        <v-snackbar
+          v-model="snackbar"
+          top
+          right
+          :timeout="3000"
+        >
+          {{ message }}
+          <v-btn
+            color="pink"
+            text
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </v-snackbar>
+
         <v-card-title>
           <h2>
             Real Time Chat
@@ -69,6 +86,8 @@
     data: () => ({
       valid: true,
       name: '',
+      message: '',
+      snackbar: false,
       nameRules: [
         v => !!v || 'Введите имя!',
         v => (v && v.length <= 16) || 'Имя не должно быть больше 16 символов!',
@@ -78,7 +97,16 @@
         v => !!v || 'Введите комнату!'
       ],
     }),
+    mounted() {
+      const {message} = this.$route.query
+      if (message === 'noUser') {
+        this.message = 'Для начала нужно Авторизоваться!'
+      } else if (message === 'closeChat') {
+        this.message = 'Вы вышли из чата!'
+      }
 
+      this.snackbar = !!this.message
+    },
     methods: {
       ...mapMutations(['setUser']),
       goChat() {

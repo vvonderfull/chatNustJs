@@ -14,7 +14,7 @@
           </v-list-item-content>
 
           <v-list-item-icon>
-            <v-icon :color="u.id === 2 ? 'primary' : 'grey'">mdi-message</v-icon>
+            <v-icon :color="u.id === user.id ? 'primary' : 'grey'">mdi-message</v-icon>
           </v-list-item-icon>
         </v-list-item>
       </v-list>
@@ -41,29 +41,17 @@
   export default {
     data() {
       return {
-        drawer: true,
-        users: [
-          {
-            id: 1,
-            name: 'Ivan'
-          },
-          {
-            id: 2,
-            name: 'Igor'
-          },
-          {
-            id: 3,
-            name: 'Sergey'
-          }
-        ]
+        drawer: true
       }
     },
-    computed: mapState(['user']),
+    computed: mapState(['user', 'users']),
     methods: {
       ...mapMutations(['clearUser']),
       closeChat() {
-        this.$router.push('/?message=closeChat');
-        this.clearUser();
+        this.$socket.emit('userLeave', this.user.id, () => {
+          this.$router.push('/?message=closeChat');
+          this.clearUser();
+        })
       }
     }
   }

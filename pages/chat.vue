@@ -1,6 +1,6 @@
 <template>
   <div class="chat-background">
-    <div class="chat-content">
+    <div class="chat-content" ref="block">
       <Message
         v-for="(m,index) in messages"
         :key="index"
@@ -32,7 +32,14 @@
     comments: {
       Message
     },
-    computed: mapState(['user', 'messages'])
+    computed: mapState(['user', 'messages']),
+    watch: {
+      messages() {
+        setTimeout(() => {
+          this.$refs.block.scrollTop = this.$refs.block.scrollHeight
+        }, 0)
+      }
+    }
   }
 </script>
 
