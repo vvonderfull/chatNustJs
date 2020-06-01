@@ -21,7 +21,6 @@ io.on('connection', socket => {
     })
 
     cb({userId: socket.id})
-
     io.to(data.room).emit('updateUsers', users.getAllUser(data.room))
     socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
     socket.broadcast

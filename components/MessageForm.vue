@@ -21,6 +21,8 @@
           if (typeof data === 'string') {
             console.error(data)
           } else {
+            console.log(document.getElementById('send-message'))
+            document.getElementById('send-message').play()
             this.textMessage = ''
           }
         })
