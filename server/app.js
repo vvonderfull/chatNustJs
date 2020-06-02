@@ -17,7 +17,8 @@ io.on('connection', socket => {
     users.add({
       id: socket.id,
       name: data.name,
-      room: data.room
+      room: data.room,
+      mute: false
     })
 
     cb({userId: socket.id})

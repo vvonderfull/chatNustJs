@@ -1,7 +1,5 @@
 <template>
   <div class="chat-background">
-    <audio id="send-message" src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3">
-    </audio>
     <div class="chat-content" ref="block">
       <Message
         v-for="(m,index) in messages"

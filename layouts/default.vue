@@ -5,13 +5,17 @@
         <v-subheader>Люди в комнате</v-subheader>
 
         <v-list-item
-          v-for="u in users"
+          v-for="(u, index) in users"
           :key="u.id"
-          @click.prevent
+          @click.prevent="muteUser(index)"
         >
           <v-list-item-content>
             <v-list-item-title>{{u.name}}</v-list-item-title>
           </v-list-item-content>
+
+          <v-list-item-icon v-if="u.mute">
+            <v-icon>mdi-volume-mute</v-icon>
+          </v-list-item-icon>
 
           <v-list-item-icon>
             <v-icon :color="u.id === user.id ? 'primary' : 'grey'">mdi-message</v-icon>
@@ -46,12 +50,15 @@
     },
     computed: mapState(['user', 'users']),
     methods: {
-      ...mapMutations(['clearUser']),
+      ...mapMutations(['clearUser', 'muteUsers']),
       closeChat() {
         this.$socket.emit('userLeave', this.user.id, () => {
           this.$router.push('/?message=closeChat');
           this.clearUser();
         })
+      },
+      muteUser(index) {
+        this.muteUsers(index)
       }
     }
   }
