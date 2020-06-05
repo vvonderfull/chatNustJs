@@ -8,6 +8,13 @@
         :text="m.text"
         :owner="m.id === user.id"
       />
+      <Message
+        v-for="(m,index) in messages"
+        :key="index"
+        :name="m.name"
+        :text="m.text"
+        :owner="m.id === user.id"
+      />
     </div>
     <div class="chat-form">
       <MessageForm/>
